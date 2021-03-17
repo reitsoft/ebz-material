@@ -1,7 +1,7 @@
 {
-  "name": "material-dashboard-react",
+  "name": "ebz-kalk-ui",
   "version": "1.9.0",
-  "description": "Material Dashboard React. Coded by Creative Tim",
+  "description": "UI for EBZ Components",
   "private": false,
   "main": "dist/index.js",
   "dependencies": {

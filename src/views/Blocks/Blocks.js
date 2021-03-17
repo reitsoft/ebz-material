@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { hist } from "../../index";
 // @material-ui/core
 import {
   InputAdornment,
@@ -10,12 +11,11 @@ import {
   Toolbar,
 } from "@material-ui/core";
 // @material-ui/icons
-import DashboardIcon from "@material-ui/icons/Dashboard";
+import WidgetsIcon from "@material-ui/icons/Widgets";
 import SearchIcon from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 // components
+import Button from "components/CustomButtons/Button";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import useTable from "../../components/UseTable/UseTable";
@@ -25,38 +25,11 @@ import BlocksForm from "./BlocksForm";
 // API
 import BlockAPI from "../../api";
 // Styles
-import styles from "assets/jss/material-dashboard-react/components/tasksStyle";
+import styles from "../../assets/jss/material-dashboard-react/components/buttonStyle";
 import { format, parseISO } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   ...styles,
-  cardCategoryWhite: {
-    "&,& a,& a:hover,& a:focus": {
-      color: "rgba(255,255,255,.62)",
-      margin: "0",
-      fontSize: "14px",
-      marginTop: "0",
-      marginBottom: "0",
-    },
-    "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF",
-    },
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-    "& small": {
-      color: "#777",
-      fontSize: "65%",
-      fontWeight: "400",
-      lineHeight: "1",
-    },
-  },
   pageContent: {
     margin: theme.spacing(0),
     padding: theme.spacing(2),
@@ -107,7 +80,6 @@ export default function Blocks() {
     try {
       const response = await BlockAPI.get("/blocks");
       setRecords(response.data.data);
-      console.log(response.data.data)
     } catch (error) {
       console.log(error);
     }
@@ -193,7 +165,7 @@ export default function Blocks() {
           <PageHeader
             title="Blocks"
             subtitle="Blocks contain components that fit together thematically."
-            icon={<DashboardIcon style={{ fontSize: 56 }} />}
+            icon={<WidgetsIcon style={{ fontSize: 56 }} />}
           />
           <Toolbar disableGutters className={classes.tableToolbar}>
             <Controls.Input
@@ -208,14 +180,16 @@ export default function Blocks() {
                 ),
               }}
             />
-            <Controls.Button
-              text="Add New"
+            <Button
+              color="primary"
               onClick={() => {
                 setOpenPopup(true);
                 setSelectedRecord(null);
               }}
-              startIcon={<AddIcon />}
-            />
+            >
+              <AddIcon />
+              Add new block
+            </Button>
           </Toolbar>
           <TblContainer>
             <TblHead />
@@ -225,16 +199,20 @@ export default function Blocks() {
                   <TableCell>{rec.name}</TableCell>
                   <TableCell>{rec.description}</TableCell>
                   <TableCell>{rec.components.length}</TableCell>
-                  <TableCell>{format(parseISO(rec.updatedAt), "dd.MM.yyyy")}</TableCell>
                   <TableCell>
+                    {format(parseISO(rec.updatedAt), "dd.MM.yyyy")}
+                  </TableCell>
+                  <TableCell>
+                    <Controls.ActionButton
+                      color="success"
+                      type="content"
+                      onClick={() => hist.push(`/admin/blocksdetail/${rec.id}`)}
+                    />
                     <Controls.ActionButton
                       color="primary"
                       type="edit"
                       onClick={() => openInPopup(rec)}
-                    >
-                      <EditIcon fontSize="small" />
-                    </Controls.ActionButton>
-
+                    />
                     <Controls.ActionButton
                       color="secondary"
                       type="delete"
@@ -248,9 +226,7 @@ export default function Blocks() {
                           },
                         });
                       }}
-                    >
-                      <DeleteIcon fontSize="small" />
-                    </Controls.ActionButton>
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -258,7 +234,6 @@ export default function Blocks() {
           </TblContainer>
           <TblPagination />
         </Paper>
-        {/* </GridContainer> */}
         <Controls.Popup
           title={selectedRecord ? "Edit Block" : "Add new Block"}
           openPopup={openPopup}

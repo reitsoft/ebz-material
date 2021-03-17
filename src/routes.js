@@ -13,6 +13,7 @@ import Person from "@material-ui/icons/Person";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import Blocks from "views/Blocks/Blocks.js";
+import BlocksDetail from "views/Blocks/BlocksDetail.js";
 import Components from "views/Components/Components.js";
 import Articles from "views/Articles/Articles.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
@@ -27,6 +28,7 @@ import UserProfile from "views/UserProfile/UserProfile.js";
 
 const dashboardRoutes = [
   {
+    isShown: "yes",
     path: "/dashboard",
     name: "Dashboard",
     icon: Dashboard,
@@ -34,6 +36,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    isShown: "yes",
     path: "/blocks",
     name: "Blocks",
     icon: WidgetsIcon,
@@ -41,6 +44,15 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    isShown: "no",
+    path: "/blocksdetail/:id",
+    name: "BlocksDetail",
+    icon: WidgetsIcon,
+    component: BlocksDetail,
+    layout: "/admin",
+  },
+  {
+    isShown: "yes",
     path: "/components",
     name: "Components",
     icon: DeviceHubIcon,
@@ -48,6 +60,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    isShown: "yes",
     path: "/articles",
     name: "Articles",
     icon: ExtensionIcon,
@@ -55,6 +68,7 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+    isShown: "yes",
     path: "/user",
     name: "User Profile",
     icon: Person,

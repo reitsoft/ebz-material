@@ -2,7 +2,8 @@ import {
   defaultFont,
   primaryColor,
   dangerColor,
-  grayColor
+  grayColor,
+  successColor
 } from "assets/jss/material-dashboard-react.js";
 import tooltipStyle from "assets/jss/material-dashboard-react/tooltipStyle.js";
 import checkboxAdnRadioStyle from "assets/jss/material-dashboard-react/checkboxAdnRadioStyle.js";
@@ -37,11 +38,18 @@ const tasksStyle = {
   tableActionButton: {
     width: "27px",
     height: "27px",
-    padding: "0"
+    padding: "0",
+    marginLeft: "5px",
+    marginRight: "5px"
   },
   tableActionButtonIcon: {
-    width: "17px",
-    height: "17px"
+    width: "20px",
+    height: "20px",
+  },
+  content: {
+    backgroundColor: "transparent",
+    color: successColor[0],
+    boxShadow: "none"
   },
   edit: {
     backgroundColor: "transparent",

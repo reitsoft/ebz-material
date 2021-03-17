@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Controls from "../../components/Controls";
+import Button from "components/CustomButtons/Button";
 import { useForm, Form } from "../../components/UseForm/UseForm";
 
 const initialValues = {
@@ -84,8 +85,8 @@ const BlocksForm = (props) => {
             errorText={errors.description}
           />
           <div style={{display: "flex", justifyContent: "flex-end", marginTop: 10}}>
-            <Controls.Button text="Reset" color="default" onClick={resetForm} />
-            <Controls.Button text="Submit" type="submit" />
+            <Button color="default" onClick={resetForm}>Reset</Button>
+            <Button color="primary" type="submit">Save</Button>
           </div>
           {/* <Controls.Input
             name="compInside"
